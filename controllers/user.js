@@ -20,9 +20,7 @@ try {
   const user = new User({
     name : req.body.name,
     email : req.body.email,
-    password : await bcrypt.hash(req.body.password,10),
-    posts : req.body.post,
-    
+    password : await bcrypt.hash(req.body.password,10)
   })
   await user.save()
   res.json({
@@ -35,12 +33,12 @@ try {
 router.post('/login', async (req, res) => {
   try {
     // Check if a User with the given email exists
-    const UserExist = await User.findOne({ email: req.body.email });
-    if (!UserExist)
+    const user = await User.findOne({ email: req.body.email });
+    if (!user)
       throw new Error("invalid request")
 
     // Compare the provided password with the stored hashed password
-    const comparePassword = await bcrypt.compare(req.body.password, UserExist.password)
+    const comparePassword = await bcrypt.compare(req.body.password, user.password)
     if (!comparePassword)
       throw new Error("invalid request")
 
@@ -48,11 +46,11 @@ router.post('/login', async (req, res) => {
 
     // Return the User object and JWT token
     res.json({
-      UserExist
+      user
     })
   } catch (err) {
     // Handle errors
-    res.json({ "error": err.message })
+    res.status(400).json({ "error": err.message })
   }
 })
 module.exports = router

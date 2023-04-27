@@ -3,7 +3,15 @@ const Post = require("../models/Post")
 const User = require("../models/User")
 const router = express.Router()
 
-
+router.get("/",async (req,res) => {
+  try {
+    const post = await Post.find()
+    if(post)
+    res.json({post})
+  } catch (err) {
+    res.status(400).json({"error":err.message})
+  }
+} )
 router.get("/:id",async (req,res) => {
   try {
     const id = req.params.id
