@@ -1,3 +1,4 @@
+import { authActionsTypes } from "../actions/authActions"
 import { studentsActionTypes } from "../actions/studentsAction"
 
 const initState = {
@@ -36,6 +37,8 @@ const studentReducer = (state = initState, action) => {
         ...state,
         
       }
+    case authActionsTypes.LOGOUT : 
+      return initState
     default:
       return state
   }

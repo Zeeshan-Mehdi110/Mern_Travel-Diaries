@@ -9,6 +9,7 @@ import Home from "./components/home/Home";
 import Diaries from "./components/diaries/Diaries";
 import Profile from "./components/profile/Profile";
 import AddPost from "./components/posts/AddPost";
+import DiaryUpdate from "./components/diaries/DiaryUpdate";
 
 
 const AppRoutes = () => {
@@ -24,6 +25,10 @@ const AppRoutes = () => {
     {
       path : "/add",
       element : AddPost
+    },
+    {
+      path : "/post/:id",
+      element : DiaryUpdate
     },
     {
       path : "/profile",

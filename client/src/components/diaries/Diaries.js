@@ -20,6 +20,7 @@ const Diaries = ({posts,students,dispatch}) => {
           image = {post.image} 
           location = {post.location}
           date = {new Date(`${post.date}`).toLocaleDateString()}
+          postId = {post._id}
           user = {post.user}
           />
         ))

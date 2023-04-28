@@ -13,17 +13,13 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         isLoggedIn : true,
-        student : action.student,
-        token : null,
-        error : null
+        student : action.student
       }
     case authActionsTypes.LOGIN:
       return {
         ...state,
         isLoggedIn: true,
-        student: action.student,
-        token: action.token,
-        error: null
+        student: action.student
       }
     case authActionsTypes.LOGOUT:
       return initState

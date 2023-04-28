@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -8,22 +7,32 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import travel3 from "../../static/travel3.jpg"
 import { DeleteForever, EditLocationAlt, ModeEditOutline } from '@mui/icons-material';
-import { Box, CardActions } from '@mui/material';
+import { Alert, Box, CardActions, Snackbar } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { deletePost } from '../../store/actions/postActions';
 
-export default function DiaryItem({title,description,image,location,date, user}) {
-  const id = useSelector(state=> state?.auth?.student?._id)
+export default function DiaryItem({ title, description, image, location, date, user, postId }) {
+  const [open , setOpen] = useState(false)
+  const id = useSelector(state => state?.auth?.student?._id)
 
   const isCurrentUserPost = () => {
-    if( id === user ){
+    if (id === user) {
       return true
     }
     return false
   }
-  console.log(isCurrentUserPost())
+
+  const handleDelete = () => {
+    deletePost(postId).then((data) => {
+      console.log(data)
+      setOpen(true)
+    }).catch(err => console.log(err))
+  }
 
   return (
-    <Card sx={{ width:"50%",height:'75vh',marginBottom:"14px",display:"flex", flexDirection : "column" , boxShadow : "5px 5px 10px #ccc"}}>
+    <Card sx={{ width: "50%", height: '75vh', marginBottom: "14px", display: "flex", flexDirection: "column", boxShadow: "5px 5px 10px #ccc" }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -50,19 +59,24 @@ export default function DiaryItem({title,description,image,location,date, user})
         <hr />
         <Box display={"flex"} pt={1} >
           <Typography width={"214px"} variant="caption" fontWeight={"bold"} color="text.secondary">Zeeshan Mehdi :</Typography>
-          <Typography  variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary">
             {description}
           </Typography>
         </Box>
       </CardContent>
-      { isCurrentUserPost() && <CardActions sx={{"marginLeft":"auto"}} >
-        <IconButton color='warning' >
+      {isCurrentUserPost() && <CardActions sx={{ "marginLeft": "auto" }} >
+        <IconButton LinkComponent={Link} to={`/post/${postId}`} color='warning' >
           <ModeEditOutline />
         </IconButton>
-        <IconButton color='error' >
+        <IconButton onClick={handleDelete} color='error' >
           <DeleteForever />
         </IconButton>
       </CardActions>}
+      <Snackbar open={open} autoHideDuration={6000} onClose={() => setOpen(false)}>
+        <Alert onClose={() => setOpen(false)} severity="success" sx={{ width: '100%' }}>
+          Post Deleted Successfully !!
+        </Alert>
+      </Snackbar>
     </Card>
   );
 }

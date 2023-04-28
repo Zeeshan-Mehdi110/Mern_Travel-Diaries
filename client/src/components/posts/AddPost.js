@@ -1,22 +1,16 @@
-import { Alert,Box, Button, CircularProgress, Typography } from '@mui/material'
+import { Alert,Box, Button, CircularProgress} from '@mui/material'
 import axios from 'axios'
 import { FORM_ERROR } from 'final-form'
 import { Form, Field } from 'react-final-form'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { authActionsTypes } from '../../store/actions/authActions'
 
 const AddPost = () => {
   const id = useSelector(state=> state.auth && state.auth.student && state.auth.student._id)
-  const dispatch = useDispatch()
   return <Form
     onSubmit={(data, form) => {
       return axios.post(`http://localhost:5000/api/user/post/${id}`,data)
       .then((result) => {
-        dispatch({ 
-          type : authActionsTypes.SIGNUP,
-          student : result.data.user
-        })
         setTimeout(() => {
           form.reset({})
           return {}

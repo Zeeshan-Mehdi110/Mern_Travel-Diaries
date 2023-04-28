@@ -12,6 +12,7 @@ const SignUp = () => {
     onSubmit={(data, form) => {
       return axios.post('http://localhost:5000/api/user/signup', data)
       .then((result) => {
+        console.log(result.data)
         dispatch({ 
           type : authActionsTypes.SIGNUP,
           student : result.data.user

@@ -18,7 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { Link, Outlet} from 'react-router-dom';
+import { Link, Outlet, useNavigate} from 'react-router-dom';
 import { AccountCircle } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActionsTypes } from '../../store/actions/authActions';
@@ -103,6 +103,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer() {
+  const navigate = useNavigate()
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
   const dispatch = useDispatch()
   const theme = useTheme();
@@ -116,6 +117,11 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleLogOut = () => {
+    dispatch({ type : authActionsTypes.LOGOUT })
+    navigate("/")
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -138,7 +144,7 @@ export default function MiniDrawer() {
             MernStack Travel Diaries App
           </Typography>
           <IconButton
-            onClick={() => {dispatch({ type : authActionsTypes.LOGOUT })}}
+            onClick={handleLogOut}
             size="large"
             aria-label="account of current user"
             aria-controls="menu-appbar"
