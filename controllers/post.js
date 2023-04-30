@@ -3,7 +3,7 @@ const Post = require("../models/Post")
 const User = require("../models/User")
 const router = express.Router()
 
-router.get("/",async (req,res) => {
+router.get("/load",async (req,res) => {
   try {
     const post = await Post.find()
     if(post)
@@ -19,7 +19,7 @@ router.get("/:id",async (req,res) => {
     if(post)
     res.json({post})
   } catch (err) {
-    res.status(500).json({"error":err.message})
+    res.status(400).json({"error":err.message})
   }
 } )
 router.post("/:id", async (req,res) => {

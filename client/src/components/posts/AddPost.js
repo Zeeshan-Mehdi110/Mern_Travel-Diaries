@@ -2,8 +2,7 @@ import { Alert,Box, Button, CircularProgress} from '@mui/material'
 import axios from 'axios'
 import { FORM_ERROR } from 'final-form'
 import { Form, Field } from 'react-final-form'
-import { useSelector } from 'react-redux'
-import { authActionsTypes } from '../../store/actions/authActions'
+import {useSelector } from 'react-redux'
 
 const AddPost = () => {
   const id = useSelector(state=> state.auth && state.auth.student && state.auth.student._id)

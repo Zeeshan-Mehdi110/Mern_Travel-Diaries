@@ -17,3 +17,14 @@ export const deletePost = async (id) => {
   const resData = await res.data
   return resData
 }
+
+export const getUserDetails = async (id) => {
+  const res = await axios.get(`http://localhost:5000/api/user/${id}`).catch((err) => console.log(err));
+
+  if (res.status !== 200) {
+    return console.log("No user found");
+  }
+
+  const resData = await res.data;
+  return resData;
+};

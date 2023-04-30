@@ -2,7 +2,7 @@ import { Box } from "@mui/material"
 import DiaryItem from "./DiaryItem"
 import { useEffect } from "react"
 import { loadStudents } from "../../store/actions/studentsAction"
-import { connect} from 'react-redux'
+import { connect, useSelector} from 'react-redux'
 
 
 const Diaries = ({posts,students,dispatch}) => {

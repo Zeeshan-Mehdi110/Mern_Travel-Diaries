@@ -9,9 +9,20 @@ router.get("/",async (req,res) => {
     if(users)
     res.status(200).json({users})
   } catch (err) {
-    res.status(500).json({"error":err.message})
+    res.status(400).json({"error":err.message})
   }
 })
+router.get("/:id",async (req,res) => {
+  try {
+    const id = req.params.id
+    const user = await User.findById(id).populate("posts")
+    if(user)
+    res.status(200).json({user})
+  } catch (err) {
+    res.status(400).json({"error":err.message})
+  }
+})
+
 router.post('/signup', async (req, res) => {
 try {
   const userExist = await User.findOne({email : req.body.email})

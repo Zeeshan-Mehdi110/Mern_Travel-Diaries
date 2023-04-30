@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { deletePost } from '../../store/actions/postActions';
 
-export default function DiaryItem({ title, description, image, location, date, user, postId }) {
+export default function DiaryItem({ title, description, image, location, date, user, postId , name }) {
   const [open , setOpen] = useState(false)
   const id = useSelector(state => state?.auth?.student?._id)
 
@@ -58,7 +58,7 @@ export default function DiaryItem({ title, description, image, location, date, u
         </Typography>
         <hr />
         <Box display={"flex"} pt={1} >
-          <Typography width={"214px"} variant="caption" fontWeight={"bold"} color="text.secondary">Zeeshan Mehdi :</Typography>
+          <Typography width={"214px"} variant="caption" fontWeight={"bold"} color="text.secondary">{name} :</Typography>
           <Typography variant="body2" color="text.secondary">
             {description}
           </Typography>

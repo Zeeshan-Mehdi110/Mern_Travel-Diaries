@@ -11,7 +11,7 @@ export const studentsActionTypes = {
 export const loadStudents = () => {
     return (dispatch) => {
             dispatch({ type : studentsActionTypes.LOAING_STUDENTS })
-            axios.get('http://localhost:5000/api/user/post').then(result => {
+            axios.get('http://localhost:5000/api/user/post/load').then(result => {
                 dispatch({ type : studentsActionTypes.LOADED_STUDENTS , students : result.data.post })
             }).catch(err => {
                 console.log(err)
@@ -37,7 +37,6 @@ export const editStudent = (id) => {
     return (dispatch) => {
         axios.get(`http://localhost:5000/api/user/edit/${id}`)
             .then(result => {
-                console.log(result.data)
                 dispatch({ type : studentsActionTypes.UPDATED_STUDENT , id : id  })
             })
             .catch(err => {
