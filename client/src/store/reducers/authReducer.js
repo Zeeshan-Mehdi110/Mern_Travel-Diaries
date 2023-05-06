@@ -2,7 +2,7 @@ import { authActionsTypes } from "../actions/authActions"
 
 const initState = {
   isLoggedIn: false,
-  student: null,
+  user: null,
   token: null,
   error: null
 }
@@ -13,13 +13,13 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         isLoggedIn : true,
-        student : action.student
+        user : action.student
       }
     case authActionsTypes.LOGIN:
       return {
         ...state,
         isLoggedIn: true,
-        student: action.student
+        user: action.student
       }
     case authActionsTypes.LOGOUT:
       return initState
@@ -28,7 +28,7 @@ const authReducer = (state = initState, action) => {
         ...state,
         error: action.error,
         isLoggedIn: false,
-        student: null,
+        user: null,
         token: null
       }
     default:

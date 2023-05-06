@@ -1,7 +1,11 @@
 const express = require("express")
 const User = require("../models/User")
 const bcrypt = require("bcrypt")
+const { createJWTToken } = require("../utils/util")
+const { verifyUser } = require("../middlewares/userAuth")
 const router = express.Router()
+
+// router.use(["/:id"],verifyUser)
 
 router.get("/",async (req,res) => {
   try {
@@ -28,14 +32,21 @@ try {
   const userExist = await User.findOne({email : req.body.email})
   if(userExist)
     throw new Error("There is already a user with this email")
-  const user = new User({
+  let user = new User({
     name : req.body.name,
     email : req.body.email,
     password : await bcrypt.hash(req.body.password,10)
   })
   await user.save()
+
+  const token = createJWTToken(user,12)
+
+  user = user.toObject()
+  delete user.password
+
   res.json({
-    user
+    user,
+    token
   })
 } catch (error) {
   res.status(400).json({"error":error.message})
@@ -44,7 +55,7 @@ try {
 router.post('/login', async (req, res) => {
   try {
     // Check if a User with the given email exists
-    const user = await User.findOne({ email: req.body.email });
+    let user = await User.findOne({ email: req.body.email });
     if (!user)
       throw new Error("invalid request")
 
@@ -54,10 +65,15 @@ router.post('/login', async (req, res) => {
       throw new Error("invalid request")
 
     // Generate JWT token for the User
+    const token = createJWTToken(user,12)
+
+    user = user.toObject()
+    delete user.password
 
     // Return the User object and JWT token
     res.json({
-      user
+      user,
+      token
     })
   } catch (err) {
     // Handle errors

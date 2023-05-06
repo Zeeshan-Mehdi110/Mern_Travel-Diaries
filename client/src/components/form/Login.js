@@ -3,12 +3,12 @@ import axios from 'axios'
 import { FORM_ERROR } from 'final-form'
 import { Form, Field } from 'react-final-form'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { authActionsTypes } from '../../store/actions/authActions'
 
 const Login = () => {
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   return <Form
   onSubmit={
     (data, form) => {
@@ -25,12 +25,14 @@ const Login = () => {
             form.reset({})
             return {}
           }, 2000);
-        }).catch(err => {
-          if(err.message === "Request failed with status code 400" )
-          return { [FORM_ERROR] : "invalid request" }
-          return { [FORM_ERROR]: err.message }
-        })
-    }}
+      navigate('/profile')
+    }).catch(err => {
+      if(err.message === "Request failed with status code 400" )
+      return { [FORM_ERROR] : "invalid request" }
+      return { [FORM_ERROR]: err.message }
+    })
+    }
+  }
     validate={(data) => {
       const errors = {};
 

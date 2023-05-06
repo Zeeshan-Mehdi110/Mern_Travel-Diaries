@@ -1,18 +1,17 @@
 import { Route, Routes } from "react-router-dom";
 import MiniDrawer from "./components/form/MiniDrawer";
 import SignUp from "./components/form/SignUp";
-import StudentsData from "./components/students/StudentsData";
 import Login from "./components/form/Login";
-import LogOut from "./components/form/LogOut";
-import EditStudent from "./components/form/EditStudent";
 import Home from "./components/home/Home";
 import Diaries from "./components/diaries/Diaries";
 import Profile from "./components/profile/Profile";
 import AddPost from "./components/posts/AddPost";
 import DiaryUpdate from "./components/diaries/DiaryUpdate";
+import { useSelector } from "react-redux";
 
 
 const AppRoutes = () => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
   const routes = [
     {
       path : "/",
@@ -22,6 +21,16 @@ const AppRoutes = () => {
       path : "/diaries",
       element : Diaries
     },
+    {
+      path : "/signUp",
+      element : SignUp,
+    },
+    {
+      path : "/login",
+      element : Login,
+    },
+  ]
+  const loggedInRoutes = [
     {
       path : "/add",
       element : AddPost
@@ -35,28 +44,30 @@ const AppRoutes = () => {
       element : Profile,
     },
     {
+      path : "/",
+      element : Home,
+    },
+    {
+      path : "/diaries",
+      element : Diaries
+    },
+    {
       path : "/signUp",
       element : SignUp,
     },
     {
       path : "/login",
       element : Login,
-    },
-    {
-      path : "/logOut",
-      element : LogOut,
-    },
-    {
-      path : "/edit/:id",
-      element : EditStudent,
-    },
+    }
   ]
   return (
     <div>
         <Routes>
           <Route path="/" element={<MiniDrawer />} >
           {
-            routes.map((route,index) => {
+            isLoggedIn ? loggedInRoutes.map((route,index) => {
+              return <Route key={index} path={route.path} element={<route.element />} />
+            }) : routes.map((route,index) => {
               return <Route key={index} path={route.path} element={<route.element />} />
             })
           }

@@ -15,7 +15,7 @@ import { deletePost } from '../../store/actions/postActions';
 
 export default function DiaryItem({ title, description, image, location, date, user, postId , name }) {
   const [open , setOpen] = useState(false)
-  const id = useSelector(state => state?.auth?.student?._id)
+  const id = useSelector(state => state?.auth?.user?._id)
 
   const isCurrentUserPost = () => {
     if (id === user) {
@@ -32,11 +32,11 @@ export default function DiaryItem({ title, description, image, location, date, u
   }
 
   return (
-    <Card sx={{ width: "50%", height: '75vh', marginBottom: "14px", display: "flex", flexDirection: "column", boxShadow: "5px 5px 10px #ccc" }}>
+    <Card sx={{ width: "50%", height: 'auto', marginBottom: "14px", display: "flex", flexDirection: "column", boxShadow: "5px 5px 10px #ccc" }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+            {name.charAt(0).toUpperCase()}
           </Avatar>
         }
         action={
@@ -64,14 +64,16 @@ export default function DiaryItem({ title, description, image, location, date, u
           </Typography>
         </Box>
       </CardContent>
-      {isCurrentUserPost() && <CardActions sx={{ "marginLeft": "auto" }} >
-        <IconButton LinkComponent={Link} to={`/post/${postId}`} color='warning' >
-          <ModeEditOutline />
-        </IconButton>
-        <IconButton onClick={handleDelete} color='error' >
-          <DeleteForever />
-        </IconButton>
-      </CardActions>}
+      {
+        isCurrentUserPost() && <CardActions sx={{ "marginLeft": "auto" }} >
+          <IconButton LinkComponent={Link} to={`/post/${postId}`} color='warning' >
+            <ModeEditOutline />
+          </IconButton>
+          <IconButton onClick={handleDelete} color='error' >
+            <DeleteForever />
+          </IconButton>
+        </CardActions>
+      }
       <Snackbar open={open} autoHideDuration={6000} onClose={() => setOpen(false)}>
         <Alert onClose={() => setOpen(false)} severity="success" sx={{ width: '100%' }}>
           Post Deleted Successfully !!

@@ -20,28 +20,3 @@ export const loadStudents = () => {
     }
 }
 
-export const deleteStudent = (id) => {
-    return (dispatch) => {
-        axios.post(`http://localhost:5000/api/user/delete/${id}`)
-            .then(result => {
-                dispatch({ type : studentsActionTypes.DELETED_STUDENT , id : id  })
-            })
-            .catch(err => {
-                console.log(err)
-                dispatch({ type : studentsActionTypes.ERROR_OCCURE , error : err.message })
-            })
-    }
-}
-
-export const editStudent = (id) => {
-    return (dispatch) => {
-        axios.get(`http://localhost:5000/api/user/edit/${id}`)
-            .then(result => {
-                dispatch({ type : studentsActionTypes.UPDATED_STUDENT , id : id  })
-            })
-            .catch(err => {
-                console.log(err)
-                dispatch({ type : studentsActionTypes.ERROR_OCCURE , error : err.message })
-            })
-    }
-}

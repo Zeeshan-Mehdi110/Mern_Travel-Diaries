@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get("/load",async (req,res) => {
   try {
-    const post = await Post.find()
+    const post = await Post.find().populate("user")
     if(post)
     res.json({post})
   } catch (err) {
@@ -64,7 +64,7 @@ router.delete("/delete/:id", async (req,res) => {
       throw new Error("User not found")
       // Remove the post ID from the user's posts array
       await user.posts.pull(postId);
-      // const dpost = await Post.findByIdAndDelete(postId)
+      // const post = await Post.findByIdAndDelete(postId)
       // await Promise.all([post.delete(), user.save()]);
       await user.save();
       await Post.findByIdAndDelete(postId)

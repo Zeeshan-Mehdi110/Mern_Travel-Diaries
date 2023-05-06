@@ -3,7 +3,7 @@ import studentReducer from "./studentReducer";
 import authReducer from "./authReducer";
 
 const allReducers = {
-  students: studentReducer,
+  posts: studentReducer,
   auth: authReducer,
 }
 export const rootReducer = combineReducers(allReducers)

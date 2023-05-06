@@ -23,10 +23,11 @@ const postSchema = new mongoose.Schema({
     required : true,
   },
   // every post has a single User
-  user : {
-    type : mongoose.Types.ObjectId,
-    ref : "User",
-  }
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 })
 postSchema.set('toJSON', {
   getters: true,

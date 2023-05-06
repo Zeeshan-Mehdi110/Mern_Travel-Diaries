@@ -10,7 +10,7 @@ const Home = () => {
         <Box width={"100%"} height={"30%"} pt={"16px"} >
         <Typography textAlign={"center"} fontFamily={"var(--dancing)"} variant="h4" >SHARE YOUR TRAVEL DIARIES WITH US</Typography>
         <Box margin={"auto"} textAlign={"center"} mt={2} >
-          <Button LinkComponent={Link} to="/add" variant="outlined" sx={{"marginRight":2}} >Share Your Story</Button>
+          <Button LinkComponent={Link} to="/login" variant="outlined" sx={{"marginRight":2}} >Share Your Story</Button>
           <Button LinkComponent={Link} to="/diaries" variant="contained">View Diaries</Button>
         </Box>
         </Box>

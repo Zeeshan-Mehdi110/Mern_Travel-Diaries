@@ -141,7 +141,7 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div" style={{ 'fontFamily': 'var(--josefin)' }} >
-            MernStack Travel Diaries App
+            MERN Stack Travel Diaries App
           </Typography>
           <IconButton
             onClick={handleLogOut}
@@ -154,7 +154,7 @@ export default function MiniDrawer() {
             color="inherit"
           >
             <Box visibility={"hidden"} className="sinupBox" sx={{ "color": "white", "fontSize": '15px', "fontFamily": "var(--josefin)" }}>Logout</Box>
-            <Link   to='/logOut' style={{ "textDecoration": "none", "color": "white" }} ><AccountCircle /></Link>
+            <Link   to='/' style={{ "textDecoration": "none", "color": "white" }} ><AccountCircle /></Link>
           </IconButton>
         </Toolbar>
       </AppBar>

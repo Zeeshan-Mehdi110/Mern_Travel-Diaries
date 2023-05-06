@@ -2,10 +2,10 @@ import { Box } from "@mui/material"
 import DiaryItem from "./DiaryItem"
 import { useEffect } from "react"
 import { loadStudents } from "../../store/actions/studentsAction"
-import { connect, useSelector} from 'react-redux'
+import { connect} from 'react-redux'
 
 
-const Diaries = ({posts,students,dispatch}) => {
+const Diaries = ({posts,dispatch}) => {
   useEffect(()=> {
     dispatch(loadStudents())
   },[])
@@ -21,7 +21,8 @@ const Diaries = ({posts,students,dispatch}) => {
           location = {post.location}
           date = {new Date(`${post.date}`).toLocaleDateString()}
           postId = {post._id}
-          user = {post.user}
+          user = {post.user._id}
+          name = {post.user.name}
           />
         ))
       }
@@ -30,7 +31,7 @@ const Diaries = ({posts,students,dispatch}) => {
 }
 const mapStateToProps = (state) => {
   return {
-    posts : state.students.students
+    posts : state.posts.posts
   }
 }
 const wrapper = connect(mapStateToProps)

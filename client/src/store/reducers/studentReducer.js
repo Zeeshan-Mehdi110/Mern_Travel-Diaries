@@ -2,7 +2,7 @@ import { authActionsTypes } from "../actions/authActions"
 import { studentsActionTypes } from "../actions/studentsAction"
 
 const initState = {
-  students: [],
+  posts: [],
   loading: false,
   error: null
 }
@@ -18,7 +18,7 @@ const studentReducer = (state = initState, action) => {
       return {
         ...state,
         loading: false,
-        students: action.students,
+        posts: action.students,
         error: null
       }
     case studentsActionTypes.ERROR_OCCURE:
@@ -30,7 +30,7 @@ const studentReducer = (state = initState, action) => {
     case studentsActionTypes.DELETED_STUDENT:
       return {
         ...state,
-        students: state.students.filter(students => students._id !== action.id)
+        posts: state.students.filter(students => students._id !== action.id)
       }
     case studentsActionTypes.UPDATED_STUDENT : 
       return {
