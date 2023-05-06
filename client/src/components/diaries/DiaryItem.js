@@ -26,7 +26,6 @@ export default function DiaryItem({ title, description, image, location, date, u
 
   const handleDelete = () => {
     deletePost(postId).then((data) => {
-      console.log(data)
       setOpen(true)
     }).catch(err => console.log(err))
   }

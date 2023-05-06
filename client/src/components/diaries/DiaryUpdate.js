@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 import { Alert,Box, Button, CircularProgress} from '@mui/material'
 import { FORM_ERROR } from 'final-form'
 import { Form, Field } from 'react-final-form'
-import { useDispatch } from 'react-redux'
 import { getPostDetails } from '../../store/actions/postActions'
 
 const DiaryUpdate = () => {
@@ -15,7 +14,6 @@ const DiaryUpdate = () => {
     image : "",
     location : "",
   })
-  const dispatch = useDispatch()
   const id = useParams().id
   useEffect(() => {
     getPostDetails(id).then(data => {

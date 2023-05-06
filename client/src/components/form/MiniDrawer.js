@@ -104,9 +104,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function MiniDrawer() {
   const navigate = useNavigate()
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
   const dispatch = useDispatch()
   const theme = useTheme();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
   const [open, setOpen] = React.useState(false);
 
 

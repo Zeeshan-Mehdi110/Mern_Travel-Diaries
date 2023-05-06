@@ -14,7 +14,7 @@ const SignUp = () => {
       .then((result) => {
         dispatch({ 
           type : authActionsTypes.SIGNUP,
-          student : result.data.user
+          user : result.data.user
         })
         setTimeout(() => {
           form.reset({})
@@ -32,12 +32,12 @@ const SignUp = () => {
       if (!data.name)
         errors.name = "";
       else if (data.name.length < 3)
-        errors.name = "name should have at least 3 charecters";
+        errors.name = "name should have at least 3 characters";
 
       if (!data.password)
         errors.password = "";
       else if (data.password.length < 6)
-        errors.password = "password must be at least 6 charecters";
+        errors.password = "password must be at least 6 characters";
 
       return errors
     }}

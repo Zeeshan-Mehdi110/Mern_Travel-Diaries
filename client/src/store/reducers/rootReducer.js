@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import studentReducer from "./studentReducer";
 import authReducer from "./authReducer";
+import postsReducer from "./postsReducer";
 
 const allReducers = {
-  posts: studentReducer,
+  posts: postsReducer,
   auth: authReducer,
 }
 export const rootReducer = combineReducers(allReducers)
