@@ -17,7 +17,7 @@ const Login = () => {
     .then((result) => {
       dispatch({ 
         type : authActionsTypes.LOGIN,
-        student : result.data.user, 
+        user : result.data.user, 
         token : result.data.token
       })
       localStorage.setItem("token" , result.data.token)
