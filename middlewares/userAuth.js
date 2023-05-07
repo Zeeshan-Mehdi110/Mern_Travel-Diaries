@@ -17,7 +17,6 @@ const verifyUser = async (req,res,next) => {
         else resolve(decoded)
       })
     })
-
     const user = await User.findById(decoded_token.uid)
     if(!user) throw new Error("invalid request")
     req.user = user;

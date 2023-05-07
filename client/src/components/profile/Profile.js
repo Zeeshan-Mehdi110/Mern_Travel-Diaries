@@ -7,12 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { getUserDetails } from "../../store/actions/postActions";
 import { authActionsTypes } from "../../store/actions/authActions";
 const Profile = () => {
-  const id = useSelector(state => state?.auth?.user?._id)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [user, setUser] = useState();
   useEffect(() => {
-    getUserDetails(id)
+    getUserDetails()
       .then((data) => {
         setUser(data.user)
       })

@@ -15,6 +15,7 @@ const Login = () => {
     
     return axios.post('http://localhost:5000/api/user/login', data)
     .then((result) => {
+      console.log(result)
       dispatch({ 
         type : authActionsTypes.LOGIN,
         user : result.data.user, 

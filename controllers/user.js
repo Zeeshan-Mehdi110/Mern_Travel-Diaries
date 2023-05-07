@@ -2,10 +2,10 @@ const express = require("express")
 const User = require("../models/User")
 const bcrypt = require("bcrypt")
 const { createJWTToken } = require("../utils/util")
-const { verifyUser } = require("../middlewares/userAuth")
+const { verifyUser } = require("../../../backend class/utils/middlewares")
 const router = express.Router()
 
-// router.use(["/:id"],verifyUser)
+router.use( ["/profile"] , verifyUser )
 
 router.get("/",async (req,res) => {
   try {
@@ -16,15 +16,23 @@ router.get("/",async (req,res) => {
     res.status(400).json({"error":err.message})
   }
 })
-router.get("/:id",async (req,res) => {
+router.get("/profile",async (req,res) => {
   try {
-    const id = req.params.id
-    const user = await User.findById(id).populate("posts")
+    const user = await User.findById(req.user._id).populate("posts")
     if(user)
     res.status(200).json({user})
   } catch (err) {
-    res.status(400).json({"error":err.message})
+    res.status(400).json({ error : err.message })
   }
+
+  // try {
+  //   const id = req.params.id
+  //   const user = await User.findById(id).populate("posts")
+  //   if(user)
+  //   res.status(200).json({user})
+  // } catch (err) {
+  //   res.status(400).json({"error":err.message})
+  // }
 })
 
 router.post('/signup', async (req, res) => {
@@ -65,7 +73,7 @@ router.post('/login', async (req, res) => {
       throw new Error("invalid request")
 
     // Generate JWT token for the User
-    const token = createJWTToken(user,12)
+    const token = await createJWTToken(user,12)
 
     user = user.toObject()
     delete user.password
@@ -80,4 +88,13 @@ router.post('/login', async (req, res) => {
     res.status(400).json({ "error": err.message })
   }
 })
+
+// router.get("/profile",async (req,res) => {
+//   try {
+//     const user = await User.findById(req.user._id)
+//     res.json(user)
+//   } catch (err) {
+//     res.status(400).json({ error : err.message })
+//   }
+// })
 module.exports = router

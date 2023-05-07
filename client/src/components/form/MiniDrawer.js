@@ -120,6 +120,7 @@ export default function MiniDrawer() {
 
   const handleLogOut = () => {
     dispatch({ type : authActionsTypes.LOGOUT })
+    localStorage.removeItem("token")
     navigate("/")
   }
 

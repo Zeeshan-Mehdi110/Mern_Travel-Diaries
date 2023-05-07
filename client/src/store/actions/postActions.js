@@ -20,6 +20,7 @@ export const loadPosts = () => {
 
 export const getPostDetails = async (id) => {
   const res =  await axios.get(`http://localhost:5000/api/user/post/${id}`) 
+  console.log(res)
   if (res.status !== 200){
     console.log("Unable to fetch Data")
   }  
@@ -36,8 +37,8 @@ export const deletePost = async (id) => {
   return resData
 }
 
-export const getUserDetails = async (id) => {
-  const res = await axios.get(`http://localhost:5000/api/user/${id}`).catch((err) => console.log(err));
+export const getUserDetails = async () => {
+  const res = await axios.get(`http://localhost:5000/api/user/profile`).catch((err) => console.log(err));
 
   if (res.status !== 200) {
     return console.log("No user found");
