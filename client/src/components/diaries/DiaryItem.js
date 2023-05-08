@@ -5,7 +5,6 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
-import travel3 from "../../static/travel3.jpg"
 import { DeleteForever, EditLocationAlt, ModeEditOutline } from '@mui/icons-material';
 import { Alert, Box, CardActions, Snackbar } from '@mui/material';
 import { useSelector } from 'react-redux';
@@ -48,7 +47,7 @@ export default function DiaryItem({ title, description, image, location, date, u
       />
       <img
         height="194"
-        src={travel3}
+        src={image}
         alt="Paella dish"
       />
       <CardContent>
