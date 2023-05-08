@@ -14,7 +14,6 @@ const Profile = () => {
     getUserDetails()
       .then((data) => {
         setUser(data.user)
-        console.log(data.user.posts)
         dispatch(setUserInRedux(data.user))
       })
       .catch((err) => console.log(err));
