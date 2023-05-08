@@ -20,6 +20,7 @@ const Profile = () => {
   }, []);
   const handleClick = () => {
     dispatch({ type : authActionsTypes.LOGOUT })
+    localStorage.removeItem("token");
     navigate("/")
   };
   const images = [

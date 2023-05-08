@@ -38,14 +38,11 @@ try {
   })
   await user.save()
 
-  const token = await createJWTToken(user,12)
-
   user = user.toObject()
   delete user.password
 
   res.json({
-    user,
-    token
+    user
   })
 } catch (error) {
   res.status(400).json({"error":error.message})

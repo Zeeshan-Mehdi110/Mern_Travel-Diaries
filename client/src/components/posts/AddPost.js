@@ -35,7 +35,7 @@ const AddPost = () => {
               <Field component='input' name='image' size='small' placeholder='Image URL' style={{ "marginBottom": '16px', 'padding': '14px', 'borderRadius': '5px', 'fontFamily': 'var(--josefin)', 'border': '1px solid gray', 'fontSize': '15px' }} />
               <Field component='input'  name='location' size='small' placeholder='Location ' style={{ "marginBottom": '16px', 'padding': '14px', 'borderRadius': '5px', 'fontFamily': 'var(--josefin)', 'border': '1px solid gray', 'fontSize': '15px' }} />
               <Field component='input' type='date'  name='date' size='small' placeholder='Date' style={{ "marginBottom": '16px', 'padding': '14px', 'borderRadius': '5px', 'fontFamily': 'var(--josefin)', 'border': '1px solid gray', 'fontSize': '15px' }} />
-              <Button type='submit' variant='contained' style={{ 'backgroundColor': 'crimson', 'color': 'white', 'fontFamily': 'var(--josefin)' }} disabled={submitting || invalid} >POST</Button>
+              <Button type='submit' variant='contained' style={{ 'backgroundColor': 'crimson', 'color': 'white', 'fontFamily': 'var(--josefin)' }} disabled={submitting || invalid} >ADD Diary</Button>
             </Box>
             <Box  >
               {

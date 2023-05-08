@@ -12,9 +12,7 @@ const authReducer = (state = initState, action) => {
     case authActionsTypes.SIGNUP : 
       return {
         ...state,
-        isLoggedIn : true,
         user : action.user,
-        token : action.token,
       }
     case authActionsTypes.LOGIN:
       return {

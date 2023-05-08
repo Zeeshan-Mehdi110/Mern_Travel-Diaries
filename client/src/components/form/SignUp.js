@@ -15,9 +15,7 @@ const SignUp = () => {
         dispatch({ 
           type : authActionsTypes.SIGNUP,
           user : result.data.user,
-          token : result.data.token
         })
-        localStorage.setItem("token" , result.data.token)
         setTimeout(() => {
           form.reset({})
           return {}
