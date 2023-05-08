@@ -2,7 +2,7 @@ const express = require("express")
 const User = require("../models/User")
 const bcrypt = require("bcrypt")
 const { createJWTToken } = require("../utils/util")
-const { verifyUser } = require("../../../backend class/utils/middlewares")
+const { verifyUser } = require("../middlewares/userAuth")
 const router = express.Router()
 
 router.use( ["/profile"] , verifyUser )
@@ -24,15 +24,6 @@ router.get("/profile",async (req,res) => {
   } catch (err) {
     res.status(400).json({ error : err.message })
   }
-
-  // try {
-  //   const id = req.params.id
-  //   const user = await User.findById(id).populate("posts")
-  //   if(user)
-  //   res.status(200).json({user})
-  // } catch (err) {
-  //   res.status(400).json({"error":err.message})
-  // }
 })
 
 router.post('/signup', async (req, res) => {
@@ -47,7 +38,7 @@ try {
   })
   await user.save()
 
-  const token = createJWTToken(user,12)
+  const token = await createJWTToken(user,12)
 
   user = user.toObject()
   delete user.password
@@ -89,12 +80,4 @@ router.post('/login', async (req, res) => {
   }
 })
 
-// router.get("/profile",async (req,res) => {
-//   try {
-//     const user = await User.findById(req.user._id)
-//     res.json(user)
-//   } catch (err) {
-//     res.status(400).json({ error : err.message })
-//   }
-// })
 module.exports = router

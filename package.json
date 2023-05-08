@@ -4,6 +4,7 @@
   "description": "MERN Travel Diaries project",
   "main": "index.js",
   "scripts": {
+    "server":"nodemon index.js --ignore client/ ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

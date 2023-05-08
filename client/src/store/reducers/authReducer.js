@@ -32,6 +32,11 @@ const authReducer = (state = initState, action) => {
             }
     case authActionsTypes.LOGOUT:
       return initState
+    case authActionsTypes.SET_USER:
+      return {
+        ...state,
+        user: action.user,
+      }
     case authActionsTypes.AUTH_ERROR:
       return {
         ...state,

@@ -22,6 +22,7 @@ import { Link, Outlet, useNavigate} from 'react-router-dom';
 import { AccountCircle } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActionsTypes } from '../../store/actions/authActions';
+import { Avatar } from '@mui/material';
 
 const linksArr = [
   { label : "Home", path : "/" },
@@ -107,6 +108,7 @@ export default function MiniDrawer() {
   const dispatch = useDispatch()
   const theme = useTheme();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+  const name = useSelector((state) => state?.auth?.user?.name)
   const [open, setOpen] = React.useState(false);
 
 
@@ -155,7 +157,12 @@ export default function MiniDrawer() {
             color="inherit"
           >
             <Box visibility={"hidden"} className="sinupBox" sx={{ "color": "white", "fontSize": '15px', "fontFamily": "var(--josefin)" }}>Logout</Box>
-            <Link   to='/' style={{ "textDecoration": "none", "color": "white" }} ><AccountCircle /></Link>
+            {
+              name ? <Avatar sx={{ backgroundColor: "red" }} aria-label="recipe">
+                      {name.charAt(0).toUpperCase()}
+                    </Avatar> : 
+                    <Link   to='/' style={{ "textDecoration": "none", "color": "white" }} ><AccountCircle /></Link>
+            }
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -165,6 +172,7 @@ export default function MiniDrawer() {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
+        <Divider />
         <List>
           {
             isLoggedIn ?  loggedInArr.map((item,index) => (
