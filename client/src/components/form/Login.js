@@ -40,7 +40,7 @@ const Login = () => {
       if (!data.password)
         errors.password = "";
       else if (data.password.length < 6)
-        errors.password = "password must be at least 6 charecters";
+        errors.password = "password must be at least 6 characters";
 
       return errors
     }}
