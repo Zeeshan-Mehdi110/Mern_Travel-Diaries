@@ -18,10 +18,6 @@ function App() {
       dispatch({ type : authActionsTypes.LOAD_TOKEN , token : token })
     }
   },[])
-
-  useEffect(() => {
-    dispatch(loadPosts())
-  },[])
   return (
     <>
       <AppRoutes />

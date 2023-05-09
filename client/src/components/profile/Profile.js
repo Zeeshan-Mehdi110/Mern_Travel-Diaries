@@ -9,7 +9,7 @@ import { authActionsTypes, setUserInRedux } from "../../store/actions/authAction
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
   useEffect(() => {
     getUserDetails()
       .then((data) => {
@@ -64,7 +64,7 @@ const Profile = () => {
             alignItems={"center"}
           >
             {
-            user.posts.length > 0 ?
+            user?.posts?.length > 0 ?
             user.posts.map((post, index) => (
               <DiaryItem
                 key={index}
