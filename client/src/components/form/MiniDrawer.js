@@ -189,12 +189,12 @@ export default function MiniDrawer() {
             )) :
             linksArr.map((item,index) => (
               <ListItem key={index} disablePadding sx={{ display: 'block' }}  >
-                <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5, }} >
+                <ListItemButton  sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5, }} >
                   <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center', }}  >
-                    <InboxIcon />
+                    { index % 2 === 0 ? <InboxIcon /> : <MailIcon />  }
                   </ListItemIcon>
                 <ListItemText sx={{ opacity: open ? 1 : 0 }} style={{ 'fontFamily': 'var(--josefin)' }} >
-                  <Link to={item.path} style={{ 'textDecoration': 'none', 'fontFamily': 'var(--josefin)' }}  >{item.label}</Link>
+                  <Link to={item.path}  style={{ 'textDecoration': 'none', 'fontFamily': 'var(--josefin)' }}  >{item.label}</Link>
                 </ListItemText>
                 </ListItemButton>
               </ListItem>
