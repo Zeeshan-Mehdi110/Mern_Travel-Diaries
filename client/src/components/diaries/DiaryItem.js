@@ -56,7 +56,7 @@ export default function DiaryItem({ title, description, image, location, date, u
         </Typography>
         <hr />
         <Box display={"flex"} pt={1} >
-          <Typography width={"214px"} variant="caption" fontWeight={"bold"} color="text.secondary">{name} :</Typography>
+          <Typography width={"80%"} variant="caption" fontWeight={"bold"} color="text.secondary">{name} :</Typography>
           <Typography variant="body2" color="text.secondary">
             {description}
           </Typography>
@@ -72,7 +72,7 @@ export default function DiaryItem({ title, description, image, location, date, u
           </IconButton>
         </CardActions>
       }
-      <Snackbar open={open} autoHideDuration={6000} onClose={() => setOpen(false)}>
+      <Snackbar open={open} autoHideDuration={4000} onClose={() => setOpen(false)}>
         <Alert onClose={() => setOpen(false)} severity="success" sx={{ width: '100%' }}>
           Post Deleted Successfully !!
         </Alert>

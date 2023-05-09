@@ -7,6 +7,7 @@ router.get("/load",async (req,res) => {
   try {
     const post = await Post.find().populate("user")
     if(post)
+    console.log(post)
     res.json({post})
   } catch (err) {
     res.status(400).json({"error":err.message})
