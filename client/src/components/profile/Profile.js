@@ -5,7 +5,10 @@ import DiaryItem from "../diaries/DiaryItem";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { getUserDetails } from "../../store/actions/postActions";
-import { authActionsTypes, setUserInRedux } from "../../store/actions/authActions";
+import {
+  authActionsTypes,
+  setUserInRedux,
+} from "../../store/actions/authActions";
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -13,15 +16,15 @@ const Profile = () => {
   useEffect(() => {
     getUserDetails()
       .then((data) => {
-        setUser(data.user)
-        dispatch(setUserInRedux(data.user))
+        setUser(data.user);
+        dispatch(setUserInRedux(data.user));
       })
       .catch((err) => console.log(err));
   }, []);
   const handleClick = () => {
-    dispatch({ type : authActionsTypes.LOGOUT })
+    dispatch({ type: authActionsTypes.LOGOUT });
     localStorage.removeItem("token");
-    navigate("/")
+    navigate("/");
   };
   const images = [
     "https://cdn.pixabay.com/photo/2016/01/09/18/27/camera-1130731_960_720.jpg",
@@ -29,7 +32,7 @@ const Profile = () => {
     "https://cdn.pixabay.com/photo/2017/10/23/05/56/summer-2880261_960_720.jpg",
     "https://cdn.pixabay.com/photo/2017/01/28/02/24/japan-2014618_960_720.jpg",
     "https://cdn.pixabay.com/photo/2012/08/06/00/53/bridge-53769_960_720.jpg",
-  ]
+  ];
   return (
     <Box display="flex" flexDirection={"column"}>
       {user && (
@@ -51,7 +54,7 @@ const Profile = () => {
           </Typography>
           <Button
             onClick={handleClick}
-            sx={{ mr: "auto", width: "15%", mt:"10px" }}
+            sx={{ mr: "auto", width: "15%", mt: "10px" }}
             color="warning"
             variant="contained"
           >
@@ -63,28 +66,48 @@ const Profile = () => {
             justifyContent="center"
             alignItems={"center"}
           >
-            {
-            user?.posts?.length > 0 ?
-            user.posts.map((post, index) => (
-              <DiaryItem
-                key={index}
-                title={post.title}
-                date={post.modified_on}
-                description={post.description}
-                postId={post._id}
-                image={images[index % images.length]}
-                location={post.location}
-                user={user._id}
-                name={user.name}
-              />
-            )) :         <Box width={"100%"} height={"30%"} pt={"16px"} >
-            <Typography textAlign={"center"} fontFamily={"var(--dancing)"} variant="h4" >SHARE YOUR TRAVEL DIARIES WITH US</Typography>
-            <Box margin={"auto"} textAlign={"center"} mt={2} >
-              <Button LinkComponent={Link} to="/add" variant="outlined" sx={{"marginRight":2}} >Share Your Story</Button>
-              <Button LinkComponent={Link} to="/diaries" variant="contained">View Diaries</Button>
-            </Box>
-          </Box>
-            }
+            {user?.posts?.length > 0 ? (
+              user.posts.map((post, index) => (
+                <DiaryItem
+                  key={index}
+                  title={post.title}
+                  date={post.modified_on}
+                  description={post.description}
+                  postId={post._id}
+                  image={images[index % images.length]}
+                  location={post.location}
+                  user={user._id}
+                  name={user.name}
+                />
+              ))
+            ) : (
+              <Box width={"100%"} height={"30%"} pt={"16px"}>
+                <Typography
+                  textAlign={"center"}
+                  fontFamily={"var(--dancing)"}
+                  variant="h4"
+                >
+                  SHARE YOUR TRAVEL DIARIES WITH US
+                </Typography>
+                <Box margin={"auto"} textAlign={"center"} mt={2}>
+                  <Button
+                    LinkComponent={Link}
+                    to="/add"
+                    variant="outlined"
+                    sx={{ marginRight: 2 }}
+                  >
+                    Share Your Story
+                  </Button>
+                  <Button
+                    LinkComponent={Link}
+                    to="/diaries"
+                    variant="contained"
+                  >
+                    View Diaries
+                  </Button>
+                </Box>
+              </Box>
+            )}
           </Box>{" "}
         </>
       )}
