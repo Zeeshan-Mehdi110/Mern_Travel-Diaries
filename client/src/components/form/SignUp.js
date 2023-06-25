@@ -20,7 +20,7 @@ const SignUp = () => {
     <Form
       onSubmit={(data, form) => {
         return axios
-          .post("http://localhost:5000/api/user/signup", data)
+          .post("/api/user/signup", data)
           .then((result) => {
             dispatch({
               type: authActionsTypes.LOGIN,

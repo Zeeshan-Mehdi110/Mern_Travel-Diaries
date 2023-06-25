@@ -9,7 +9,7 @@ export const usersActionTypes = {
 export const loadPosts = () => {
   return (dispatch) => {
     dispatch({ type: usersActionTypes.LOADING_POSTS })
-    axios.get('http://localhost:5000/api/user/post/load').then(result => {
+    axios.get('/api/user/post/load').then(result => {
       dispatch({ type: usersActionTypes.LOADED_POSTS, posts: result.data.post })
     }).catch(err => {
       console.log(err)
@@ -19,7 +19,7 @@ export const loadPosts = () => {
 }
 
 export const getPostDetails = async (id) => {
-  const res = await axios.get(`http://localhost:5000/api/user/post/${id}`)
+  const res = await axios.get(`/api/user/post/${id}`)
   if (res.status !== 200) {
     console.log("Unable to fetch Data")
   }
@@ -28,7 +28,7 @@ export const getPostDetails = async (id) => {
 }
 
 export const deletePost = async (id) => {
-  const res = await axios.delete(`http://localhost:5000/api/user/post/delete/${id}`)
+  const res = await axios.delete(`/api/user/post/delete/${id}`)
   if (res.status !== 200) {
     console.log("Unable to Delete")
   }
@@ -37,7 +37,7 @@ export const deletePost = async (id) => {
 }
 
 export const getUserDetails = async () => {
-  const res = await axios.get(`http://localhost:5000/api/user/profile`).catch((err) => console.log(err));
+  const res = await axios.get(`/api/user/profile`).catch((err) => console.log(err));
 
   if (res.status !== 200) {
     return console.log("No user found");

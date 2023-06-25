@@ -12,7 +12,7 @@ const AddPost = () => {
     <Box>
       <Form
         onSubmit={(data, form) => {
-          return axios.post(`http://localhost:5000/api/user/post/${id}`, data)
+          return axios.post(`/api/user/post/${id}`, data)
             .then((result) => {
               setTimeout(() => {
                 form.reset({})

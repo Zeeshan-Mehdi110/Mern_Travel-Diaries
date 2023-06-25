@@ -19,7 +19,7 @@ const Login = () => {
     <Form
       onSubmit={(data, form) => {
         return axios
-          .post("http://localhost:5000/api/user/login", data)
+          .post("/api/user/login", data)
           .then((result) => {
             console.log(result);
             dispatch({

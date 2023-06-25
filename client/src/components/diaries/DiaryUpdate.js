@@ -36,7 +36,7 @@ const DiaryUpdate = () => {
       initialValues={inputs}
       onSubmit={(data, form) => {
         return axios
-          .post(`http://localhost:5000/api/user/post/update/${id}`, data)
+          .post(`/api/user/post/update/${id}`, data)
           .then((result) => {
             navigator("/profile");
             console.log(result);
