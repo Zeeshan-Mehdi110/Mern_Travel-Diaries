@@ -12,39 +12,39 @@ import {
 } from "@mui/icons-material";
 import { Alert, Box, CardActions, Snackbar } from "@mui/material";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { Fragment, useState } from "react";
-import { deletePost } from "../../store/actions/postActions";
+import { Link, useParams } from "react-router-dom";
+import { Fragment, useEffect, useState } from "react";
+import { deletePost, getPostDetails } from "../../store/actions/postActions";
 import DeletePopUp from "../library/DeletePopup";
 
-export default function DiaryItem({
-  title,
-  description,
-  image,
-  location,
-  date,
-  user,
-  postId,
-  name,
-}) {
+const DiaryDetail = () => {
   const [open, setOpen] = useState(false);
   const id = useSelector((state) => state?.auth?.user?._id);
+  const postId = useParams().id
+  const [postData, setPostData] = useState({})
+
+  useEffect(() => {
+    getPostDetails(postId).then(({ post }) => {
+      setPostData(post)
+    })
+  }, [])
 
   const isCurrentUserPost = () => {
-    if (id === user) {
+    if (id === postData.user) {
       return true;
     }
     return false;
   };
 
   return (
-    <Link to={`/diary/${postId}`} style={{ textDecoration: "none" }} >
+    <Box>
       <Card
         sx={{
           width: { xs: "100vw", md: "500px" },
-          height: "400px",
+          height: "auto",
           marginBottom: "14px",
           display: "flex",
+          marginX: "auto",
           flexDirection: "column",
           boxShadow: "5px 5px 10px #ccc"
         }}
@@ -52,36 +52,26 @@ export default function DiaryItem({
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              {name?.charAt(0).toUpperCase()}
+              N
             </Avatar>
           }
           action={
-            isCurrentUserPost() ?
-              <IconButton
-                component={Link}
-                to={`/post/${postId}`}
-                color="warning"
-                style={{ textDecoration: "none" }}
-              >
-                <ModeEditOutline />
-              </IconButton>
-              :
-              <IconButton color="info">
-                <EditLocationAlt />
-              </IconButton>
+            <IconButton color="info">
+              <EditLocationAlt />
+            </IconButton>
           }
-          title={location}
-          subheader={date}
+          title={postData.location}
+          subheader={postData.date}
         />
-        <img height="194" src={image} alt="Paella dish" />
+        <img height="194" src={"https://cdn.pixabay.com/photo/2016/01/09/18/27/camera-1130731_960_720.jpg"} alt="Paella dish" />
         <CardContent>
-          <Typography pb={1} variant="h6" color="text.secondary">
-            {title}
+          <Typography variant="h6" color="text.secondary">
+            {postData.title}
           </Typography>
           <hr />
-          <Box display={"flex"} pt={1}>
+          <Box display={"flex"} pt={2} px={2}>
             <Typography variant="body2" color="text.secondary">
-              {description.slice(0, 48) + ` ...`}
+              {postData.description}
             </Typography>
           </Box>
         </CardContent>
@@ -116,6 +106,8 @@ export default function DiaryItem({
           </Alert>
         </Snackbar>
       </Card>
-    </Link>
-  );
+    </Box>
+  )
 }
+
+export default DiaryDetail

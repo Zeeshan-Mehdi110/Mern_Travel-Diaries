@@ -73,6 +73,7 @@ const SignUp = () => {
             justifyContent="center"
             alignItems={"center"}
             flexDirection="column"
+            mt={{ md: 9, xs: 7 }}
           >
             <form
               onSubmit={handleSubmit}
@@ -81,7 +82,7 @@ const SignUp = () => {
                 flexDirection: "column",
                 justifyContent: "center",
                 marginTop: "5px",
-                maxWidth: "700px",
+                width: { xs: "100vw", md: 600 },
                 padding: "20px",
                 boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
                 borderRadius: "3px",
@@ -97,7 +98,7 @@ const SignUp = () => {
               >
                 SignUp
               </Box>
-              <Box display={"flex"} flexDirection="column" width={600}>
+              <Box display={"flex"} flexDirection="column" width={{ xs: "100%", md: 600 }}>
                 <Field
                   name="name"
                   component="input"

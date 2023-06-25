@@ -42,28 +42,31 @@ const Profile = () => {
             textAlign={"center"}
             variant="h3"
             fontFamily={"quicksand"}
-            padding={2}
+            padding={{ xs: 2, md: "0px" }}
           >
             User Profile
           </Typography>
-          <Typography fontFamily={"quicksand"} padding={1} textAlign="left">
-            <b>Name </b>: {user.name}
-          </Typography>
-          <Typography fontFamily={"quicksand"} padding={1} textAlign="left">
-            <b>Email </b>: {user.email}
-          </Typography>
-          <Button
-            onClick={handleClick}
-            sx={{ mr: "auto", width: "15%", mt: "10px" }}
-            color="warning"
-            variant="contained"
-          >
-            Logout
-          </Button>
+          <Box paddingX={{ xs: 2, md: 8 }}>
+            <Typography fontFamily={"quicksand"} textAlign="left">
+              <b>Name </b>: {user.name}
+            </Typography>
+            <Typography fontFamily={"quicksand"} textAlign="left">
+              <b>Email </b>: {user.email}
+            </Typography>
+            <Button
+              onClick={handleClick}
+              sx={{ mr: "auto", mt: "10px", bgcolor: "crimson", "paddingLeft": "14px", "paddingRight": "14px" }}
+              variant="contained"
+            >
+              Logout
+            </Button>
+          </Box>
           <Box
-            display="flex"
-            flexDirection={"column"}
-            justifyContent="center"
+            display={"flex"}
+            flexDirection={"row"}
+            flexWrap={"wrap"}
+            p={{ xs: "0px", md: 2 }}
+            justifyContent={"space-evenly"}
             alignItems={"center"}
           >
             {user?.posts?.length > 0 ? (

@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import MiniDrawer from "./components/form/MiniDrawer";
 import SignUp from "./components/form/SignUp";
 import Login from "./components/form/Login";
 import Home from "./components/home/Home";
@@ -10,6 +9,8 @@ import DiaryUpdate from "./components/diaries/DiaryUpdate";
 import { useSelector } from "react-redux";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ResetPassword from "./components/auth/ResetPassword";
+import Header from "./components/form/Header";
+import DiaryDetail from "./components/diaries/DiaryDetail";
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -21,6 +22,10 @@ const AppRoutes = () => {
     {
       path: "/diaries",
       element: Diaries,
+    },
+    {
+      path: "/diary/:id",
+      element: DiaryDetail
     },
     {
       path: "/signUp",
@@ -60,33 +65,37 @@ const AppRoutes = () => {
       path: "/diaries",
       element: Diaries,
     },
+    {
+      path: "/diary/:id",
+      element: DiaryDetail
+    }
   ];
   return (
-    <div>
+    <>
       <Routes>
-        <Route path="/" element={<MiniDrawer />}>
+        <Route path="/" element={<Header />}>
           {isLoggedIn
             ? loggedInRoutes.map((route, index) => {
-                return (
-                  <Route
-                    key={index}
-                    path={route.path}
-                    element={<route.element />}
-                  />
-                );
-              })
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={<route.element />}
+                />
+              );
+            })
             : routes.map((route, index) => {
-                return (
-                  <Route
-                    key={index}
-                    path={route.path}
-                    element={<route.element />}
-                  />
-                );
-              })}
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={<route.element />}
+                />
+              );
+            })}
         </Route>
       </Routes>
-    </div>
+    </>
   );
 };
 
