@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <>
-      <AppBar position="sticky" sx={{ backgroundColor: "crimson", "alignItems": "center" }}>
+      <AppBar position="sticky" sx={{ backgroundColor: "crimson", "alignItems": { xs: "center", md: "normal" } }}>
         <Toolbar sx={{
           "maxWidth": "100vw", "paddingRight": "0px", "paddingLeft": "0px", "@media (min-width: 600px)": {
             paddingLeft: { xs: 0, md: "30px" },
@@ -86,9 +86,10 @@ const Header = () => {
                       textDecoration: "none",
                       color: "#FFFFFF",
                       "padding": "0px",
+                      textTransform: "capitalize",
                       "&.Mui-selected": {
                         color: "#FFFFFF",
-                        minWidth: "50px"
+                        minWidth: "50px",
                       }
                     }}
                   />
