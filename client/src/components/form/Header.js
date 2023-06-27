@@ -20,7 +20,7 @@ const loggedInArr = [
 const StyledTabs = styled(Tabs)(({ theme }) => ({
   "& .MuiTabs-indicator": {
     backgroundColor: "#FFFFFF",
-  },
+  }
 }));
 
 const Header = () => {
@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <>
-      <AppBar position="sticky" sx={{ backgroundColor: "crimson" }}>
+      <AppBar position="sticky" sx={{ backgroundColor: "crimson", "alignItems": "center" }}>
         <Toolbar sx={{
           "maxWidth": "100vw", "paddingRight": "0px", "paddingLeft": "0px", "@media (min-width: 600px)": {
             paddingLeft: { xs: 0, md: "30px" },
@@ -62,39 +62,6 @@ const Header = () => {
               MERN Stack Travel Diaries
             </Typography>
           </Box>
-
-          {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="black"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              <MenuLink data={data} styleObject={{ "color": 'black' }} />
-            </Menu>
-          </Box> */}
           <Box marginRight="auto" marginLeft="auto" display={{ md: "block", xs: "none" }} >
             {/* Autocomplete code */}
           </Box>
@@ -121,7 +88,8 @@ const Header = () => {
                       "padding": "0px",
                       "&.Mui-selected": {
                         color: "#FFFFFF",
-                      },
+                        minWidth: "50px"
+                      }
                     }}
                   />
                 ))
