@@ -21,4 +21,6 @@ app.all("*", (req, res) => {
   res.sendFile(__dirname + `/client/build/index.html`)
 })
 
-app.listen(process.env.PORT || 5000, () => console.log(`server is listening at port 5000  `))
+app.listen(5000, () => {
+  console.log(`App listening at Port 5000`);
+});
