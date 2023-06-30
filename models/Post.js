@@ -2,25 +2,28 @@ const mongoose = require("mongoose");
 const moment = require("moment")
 
 const postSchema = new mongoose.Schema({
-  title : {
-    type : String,
-    required : true,
+  title: {
+    type: String,
+    required: true,
   },
-  description : {
-    type : String,
-    required : true,
+  description: {
+    type: String,
+    required: true,
   },
-  image : {
-    type : String,
-    required : true,
+  image: {
+    type: String,
+    required: true,
   },
-  location : {
-    type : String,
-    required : true,
+  cloudinary_id: {
+    type: String,
   },
-  date : {
-    type : Date,
-    required : true,
+  location: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    required: true,
   },
   // every post has a single User
   user: {
@@ -38,6 +41,6 @@ postSchema.set('toJSON', {
   }
 });
 
-const Post = mongoose.model("Post",postSchema)
+const Post = mongoose.model("Post", postSchema)
 
 module.exports = Post

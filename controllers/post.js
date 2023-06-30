@@ -3,19 +3,9 @@ const Post = require("../models/Post")
 const User = require("../models/User")
 const router = express.Router()
 const { v2 } = require('cloudinary');
-const multer = require('multer')
-const path = require("path")
-const fs = require('fs');
+const upload = require("../utils/multer")
 
-// Multer configuration
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
 
-// Create the temp directory if it doesn't exist
-const tempDirectory = path.join(__dirname, '../temp');
-if (!fs.existsSync(tempDirectory)) {
-  fs.mkdirSync(tempDirectory);
-}
 
 v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -48,16 +38,13 @@ router.post("/:id", upload.single("image"), async (req, res) => {
     if (!existingUser)
       throw new Error("User not found")
     const { title, description, location, date } = req.body
-    // Save the buffer to a temporary file
-    const tempFilePath = path.join(__dirname, '../temp', req.file.originalname);
-    fs.writeFileSync(tempFilePath, req.file.buffer);
-    const imageUrl = await v2.uploader.upload(tempFilePath)
-    // Delete the temporary file
-    fs.unlinkSync(tempFilePath);
+    // Upload image to cloudinary
+    const imageUrl = await v2.uploader.upload(req.file.path);
     const post = new Post({
       title,
       description,
-      image: imageUrl.url,
+      image: imageUrl.secure_url,
+      cloudinary_id: imageUrl.public_id,
       location,
       date,
       user: req.params.id,
@@ -73,17 +60,17 @@ router.post("/update/:id", upload.single("image"), async (req, res) => {
   try {
     const id = req.params.id
     const { title, description, location, date } = req.body
-    // Save the buffer to a temporary file
-    const tempFilePath = path.join(__dirname, '../temp', req.file.originalname);
-    fs.writeFileSync(tempFilePath, req.file.buffer);
-    const imageUrl = await v2.uploader.upload(tempFilePath)
-    // Delete the temporary file
-    fs.unlinkSync(tempFilePath);
-
+    const prevPost = await Post.findById(id)
+    // Delete image from cloudinary
+    await v2.uploader.destroy(prevPost.cloudinary_id);
+    // Upload new image to cloudinary
+    const imageUrl = await v2.uploader.upload(req.file.path);
+    console.log(imageUrl)
     const record = {
       title,
       description,
       image: imageUrl.secure_url,
+      cloudinary_id: imageUrl.public_id,
       location,
       date,
       user: req.params.id,
@@ -102,6 +89,8 @@ router.delete("/delete/:id", async (req, res) => {
     const post = await Post.findById(postId)
     if (!post)
       throw new Error("Post not Found")
+    // Delete image from cloudinary
+    await v2.uploader.destroy(post.cloudinary_id);
     const user = await User.findById(post.user.toString())
     if (!user)
       throw new Error("User not found")

@@ -63,7 +63,7 @@ const DiaryDetail = () => {
           title={postData.location}
           subheader={postData.date}
         />
-        <img height="194" src={"https://cdn.pixabay.com/photo/2016/01/09/18/27/camera-1130731_960_720.jpg"} alt="Paella dish" />
+        <img height="194" src={postData.image} alt="Paella dish" />
         <CardContent>
           <Typography variant="h6" color="text.secondary">
             {postData.title}
