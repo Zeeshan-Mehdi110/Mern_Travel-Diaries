@@ -73,7 +73,7 @@ export default function DiaryItem({
           title={location}
           subheader={date}
         />
-        <img height="194" src={image} alt="Paella dish" />
+        <img height="194" src={image} alt="img" />
         <CardContent>
           <Typography pb={1} variant="h6" color="text.secondary">
             {title}

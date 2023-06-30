@@ -21,6 +21,11 @@ app.all("*", (req, res) => {
   res.sendFile(__dirname + `/client/build/index.html`)
 })
 
+app.use((err, req, res, next) => {
+  if (err) res.status(400).json({ error: err.message })
+  else next()
+})
+
 app.listen(5000, () => {
   console.log(`App listening at Port 5000`);
 });

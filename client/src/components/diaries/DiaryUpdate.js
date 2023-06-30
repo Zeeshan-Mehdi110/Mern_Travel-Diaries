@@ -5,16 +5,20 @@ import { Alert, Box, Button, CircularProgress } from "@mui/material";
 import { FORM_ERROR } from "final-form";
 import { Form, Field } from "react-final-form";
 import { getPostDetails } from "../../store/actions/postActions";
+import FileInput from '../library/form/FileInput'
+import preview from '../../static/preview.png'
 
 const DiaryUpdate = () => {
   const [postData, setPostData] = useState({});
   const navigator = useNavigate();
+  const [selectedImage, setSelectedImage] = useState(null)
+
   const [inputs, setInputs] = useState({
     title: "",
     description: "",
     image: "",
     location: "",
-  });
+  })
   const id = useParams().id;
   useEffect(() => {
     getPostDetails(id)
@@ -36,10 +40,9 @@ const DiaryUpdate = () => {
       initialValues={inputs}
       onSubmit={(data, form) => {
         return axios
-          .post(`/api/user/post/update/${id}`, data)
+          .postForm(`/api/user/post/update/${id}`, data)
           .then((result) => {
             navigator("/profile");
-            console.log(result);
             setTimeout(() => {
               form.reset({});
               return {};
@@ -67,6 +70,23 @@ const DiaryUpdate = () => {
             alignItems={"center"}
             flexDirection="column"
           >
+            <Box
+              sx={{
+                bgcolor: '#f5f5f5',
+                width: { xs: "100vw", md: "500px" },
+                height: { xs: "300px", md: "400px" },
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: '50px',
+              }}
+            >
+              {selectedImage ? (
+                <img src={URL.createObjectURL(selectedImage)} alt="img" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              ) : (
+                <img src={preview} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              )}
+            </Box>
             <form
               onSubmit={handleSubmit}
               style={{
@@ -118,18 +138,11 @@ const DiaryUpdate = () => {
                   }}
                 />
                 <Field
-                  component="input"
+                  component={FileInput}
                   name="image"
-                  size="small"
-                  placeholder="Image URL"
-                  style={{
-                    marginBottom: "16px",
-                    padding: "14px",
-                    borderRadius: "5px",
-                    fontFamily: "var(--josefin)",
-                    border: "1px solid gray",
-                    fontSize: "15px",
-                  }}
+                  inputProps={{ accept: 'image/*' }}
+                  selectedImage={selectedImage}
+                  setSelectedImage={setSelectedImage}
                 />
                 <Field
                   component="input"
