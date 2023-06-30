@@ -47,13 +47,11 @@ router.post("/:id", upload.single("image"), async (req, res) => {
     const existingUser = await User.findById(req.params.id)
     if (!existingUser)
       throw new Error("User not found")
-    console.log(req.body)
     const { title, description, location, date } = req.body
     // Save the buffer to a temporary file
     const tempFilePath = path.join(__dirname, '../temp', req.file.originalname);
     fs.writeFileSync(tempFilePath, req.file.buffer);
     const imageUrl = await v2.uploader.upload(tempFilePath)
-    console.log(imageUrl)
     // Delete the temporary file
     fs.unlinkSync(tempFilePath);
     const post = new Post({
@@ -79,7 +77,6 @@ router.post("/update/:id", upload.single("image"), async (req, res) => {
     const tempFilePath = path.join(__dirname, '../temp', req.file.originalname);
     fs.writeFileSync(tempFilePath, req.file.buffer);
     const imageUrl = await v2.uploader.upload(tempFilePath)
-    console.log(imageUrl)
     // Delete the temporary file
     fs.unlinkSync(tempFilePath);
 
